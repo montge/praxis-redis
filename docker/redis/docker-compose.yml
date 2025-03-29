@@ -1,0 +1,19 @@
+services:
+  redis:
+    image: redis/redis-stack:latest
+    container_name: redis-llm
+    ports:
+      - "${REDIS_PORT:-6379}:6379"  # Redis port
+      - "8001:8001"  # RedisInsight Web UI
+    environment:
+      - REDIS_ARGS=--requirepass ${REDIS_PASSWORD}
+      - REDISEARCH_ARGS=MAXSEARCHRESULTS 10000
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+    env_file:
+      - ../../.env
+
+volumes:
+  redis_data:
+    name: redis_data 
