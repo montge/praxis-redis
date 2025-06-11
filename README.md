@@ -1,4 +1,4 @@
-## Redis Stack Environment for Thesis Project
+## Redis Stack Environment for Praxis Project
 
 This repository contains a Docker-based Redis Stack environment with tools for testing and development.
 
@@ -56,4 +56,8 @@ This setup includes:
 - Redis core functionality
 - RediSearch for advanced search capabilities
 - RedisJSON for JSON document storage
-- RedisInsight Web UI accessible at http://localhost:8001 
+- RedisInsight Web UI accessible at http://localhost:8001
+
+## Attribution
+
+This project includes code that was generated or assisted by [Cursor AI](https://cursor.ai/) tools.
