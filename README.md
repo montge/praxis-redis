@@ -1,6 +1,7 @@
 ## Redis Stack Environment for Praxis Project
 
 [![CI/CD Pipeline](https://github.com/montge/praxis-redis/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/montge/praxis-redis/actions/workflows/ci.yml)
+[![Coverage](https://img.shields.io/badge/coverage-92.23%25-brightgreen.svg)](https://github.com/montge/praxis-redis/actions)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
