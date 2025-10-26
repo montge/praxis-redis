@@ -1,0 +1,9 @@
+# Development dependencies
+-r requirements.txt
+
+# Additional testing tools
+pytest-xdist>=3.6.1  # Parallel test execution
+pytest-benchmark>=4.0.0  # Performance benchmarking
+
+# Development tools
+pre-commit>=4.0.1

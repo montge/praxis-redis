@@ -48,7 +48,22 @@ The `.env` file contains the following configuration:
 
 - `scripts/start.sh`: Starts the Redis container
 - `scripts/stop.sh`: Stops and removes the Redis container
-- `scripts/test_redis_connection.py`: Test Redis connectivity and functionality
+- `scripts/test_redis_connection.py`: Legacy Redis connectivity test
+- `scripts/redis_client.py`: Modular Redis client library for programmatic access
+
+### Quick Commands (Using Makefile)
+
+```bash
+make help             # Show all available commands
+make start            # Start Redis Stack
+make stop             # Stop Redis Stack
+make test             # Run all tests
+make test-unit        # Run unit tests (fast, no Redis required)
+make test-integration # Run integration tests (requires Redis)
+make lint             # Check code quality
+make format           # Auto-format code
+make coverage         # Generate coverage report
+```
 
 ### Redis Stack Features
 
@@ -58,6 +73,61 @@ This setup includes:
 - RedisJSON for JSON document storage
 - RedisInsight Web UI accessible at http://localhost:8001
 
+## Testing
+
+This project follows **Test-Driven Development (TDD)** principles with comprehensive test coverage:
+
+### Test Structure
+
+- **Unit Tests** (`tests/unit/`): Fast, isolated tests without external dependencies
+- **Integration Tests** (`tests/integration/`): Tests requiring a running Redis instance
+- **End-to-End Tests** (`tests/e2e/`): Complete workflow tests
+
+### Running Tests
+
+```bash
+# Run all tests
+make test
+
+# Run specific test types
+make test-unit        # Unit tests only (no Redis required)
+make test-integration # Integration tests (requires Redis)
+make test-e2e         # End-to-end tests (requires Redis)
+
+# Run with coverage
+make test-all         # All tests with coverage report
+make coverage         # Generate HTML coverage report
+```
+
+### Continuous Integration
+
+The project includes GitHub Actions workflows that automatically run:
+- Code quality checks (black, ruff, mypy)
+- Unit tests (no external dependencies)
+- Integration tests (with Redis service container)
+- End-to-end tests (with Redis service container)
+- Coverage reporting
+
+All tests run on push/pull requests to `main` and `develop` branches.
+
+## Development
+
+### Code Quality
+
+```bash
+make lint             # Run all linters
+make format           # Auto-format code
+make verify           # Run lint + all tests
+```
+
+### Local Development Workflow
+
+1. Create a feature branch
+2. Write tests first (TDD approach)
+3. Implement functionality
+4. Run `make verify` to ensure quality
+5. Commit and push (CI will run automatically)
+
 ## Attribution
 
-This project includes code that was generated or assisted by [Cursor AI](https://cursor.ai/) tools.
+This project includes code that was generated or assisted by AI tools including [Cursor AI](https://cursor.ai/) and [Claude Code](https://claude.ai/code).
