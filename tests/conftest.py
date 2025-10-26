@@ -55,9 +55,7 @@ def pytest_configure(config: pytest.Config) -> None:
     config.addinivalue_line(
         "markers", "integration: Integration tests that require Redis connection"
     )
-    config.addinivalue_line(
-        "markers", "e2e: End-to-end tests that test complete workflows"
-    )
+    config.addinivalue_line("markers", "e2e: End-to-end tests that test complete workflows")
     config.addinivalue_line("markers", "slow: Tests that take a long time to run")
     config.addinivalue_line(
         "markers", "requires_redis: Tests that require a running Redis instance"

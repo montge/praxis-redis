@@ -110,9 +110,7 @@ class RedisStackClient:
         """Delete one or more keys from Redis."""
         return self.client.delete(*keys)
 
-    def create_search_index(
-        self, index_name: str, prefix: str, schema: tuple
-    ) -> None:
+    def create_search_index(self, index_name: str, prefix: str, schema: tuple) -> None:
         """Create a RediSearch index."""
         self.client.ft(index_name).create_index(
             schema, definition=IndexDefinition(prefix=[prefix], index_type=IndexType.HASH)

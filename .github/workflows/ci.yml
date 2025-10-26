@@ -111,21 +111,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Wait for Redis to be ready
-        run: |
-          for i in {1..30}; do
-            if redis-cli -h localhost -p 6379 -a test_password_for_ci ping; then
-              echo "Redis is ready!"
-              break
-            fi
-            echo "Waiting for Redis... ($i/30)"
-            sleep 2
-          done
-
-      - name: Verify Redis modules
-        run: |
-          redis-cli -h localhost -p 6379 -a test_password_for_ci MODULE LIST
-
       - name: Run integration tests
         run: |
           pytest tests/integration -v --cov=scripts --cov-report=xml --cov-report=term-missing -m integration
@@ -171,17 +156,6 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-
-      - name: Wait for Redis to be ready
-        run: |
-          for i in {1..30}; do
-            if redis-cli -h localhost -p 6379 -a test_password_for_ci ping; then
-              echo "Redis is ready!"
-              break
-            fi
-            echo "Waiting for Redis... ($i/30)"
-            sleep 2
-          done
 
       - name: Run end-to-end tests
         run: |
@@ -229,17 +203,6 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-
-      - name: Wait for Redis to be ready
-        run: |
-          for i in {1..30}; do
-            if redis-cli -h localhost -p 6379 -a test_password_for_ci ping; then
-              echo "Redis is ready!"
-              break
-            fi
-            echo "Waiting for Redis... ($i/30)"
-            sleep 2
-          done
 
       - name: Run all tests
         run: |
