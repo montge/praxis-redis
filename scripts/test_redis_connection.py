@@ -204,11 +204,9 @@ def test_redis_connection():
         # Load environment variables
         load_env()
 
-        # Debug password (show first character followed by stars)
-        password = os.getenv("REDIS_PASSWORD")
-        if password:
-            password_preview = password[0] + "*" * (len(password) - 1)
-            print(f"Using Redis password: {password_preview}")
+        # Verify password is configured (without logging it)
+        if os.getenv("REDIS_PASSWORD"):
+            print("✅ Redis authentication configured")
         else:
             print("❌ No Redis password found in environment!")
 

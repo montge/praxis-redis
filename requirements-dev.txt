@@ -2,8 +2,8 @@
 -r requirements.txt
 
 # Additional testing tools
-pytest-xdist>=3.6.1  # Parallel test execution
-pytest-benchmark>=4.0.0  # Performance benchmarking
+pytest-xdist>=4.1.0  # Parallel test execution
+pytest-benchmark>=5.2.1  # Performance benchmarking
 
 # Development tools
-pre-commit>=4.0.1
+pre-commit>=4.8.1
