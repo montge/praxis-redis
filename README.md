@@ -1,5 +1,10 @@
 ## Redis Stack Environment for Praxis Project
 
+[![CI/CD Pipeline](https://github.com/montge/praxis-redis/actions/workflows/ci.yml/badge.svg)](https://github.com/montge/praxis-redis/actions/workflows/ci.yml)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
 This repository contains a Docker-based Redis Stack environment with tools for testing and development.
 
 ### Setup Instructions
@@ -128,6 +133,18 @@ make verify           # Run lint + all tests
 4. Run `make verify` to ensure quality
 5. Commit and push (CI will run automatically)
 
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
 ## Attribution
 
 This project includes code that was generated or assisted by AI tools including [Cursor AI](https://cursor.ai/) and [Claude Code](https://claude.ai/code).
+
+## Maintainer
+
+**Evan Montgomery-Recht**
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
