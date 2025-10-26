@@ -1,8 +1,8 @@
 """Pytest configuration and shared fixtures."""
 
 import os
+from collections.abc import Generator
 from pathlib import Path
-from typing import Generator
 
 import pytest
 from dotenv import load_dotenv

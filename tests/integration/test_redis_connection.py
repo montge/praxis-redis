@@ -1,7 +1,6 @@
 """Integration tests for Redis connection and basic operations."""
 
 import pytest
-from redis.exceptions import ConnectionError as RedisConnectionError
 
 from scripts.redis_client import RedisStackClient
 

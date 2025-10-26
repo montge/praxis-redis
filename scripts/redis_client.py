@@ -5,9 +5,8 @@ Provides high-level interfaces for Redis, RediSearch, and RedisJSON operations.
 """
 
 import os
-from datetime import datetime
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any
 
 import redis
 from dotenv import load_dotenv
@@ -21,16 +20,16 @@ class RedisConfig:
 
     def __init__(
         self,
-        host: Optional[str] = None,
-        port: Optional[int] = None,
-        password: Optional[str] = None,
+        host: str | None = None,
+        port: int | None = None,
+        password: str | None = None,
     ):
         self.host = host or os.getenv("REDIS_HOST", "localhost")
         self.port = int(port or os.getenv("REDIS_PORT", "6379"))
         self.password = password or os.getenv("REDIS_PASSWORD")
 
     @classmethod
-    def from_env(cls, env_path: Optional[Path] = None) -> "RedisConfig":
+    def from_env(cls, env_path: Path | None = None) -> "RedisConfig":
         """Load configuration from .env file."""
         if env_path is None:
             env_path = Path(__file__).parents[1] / ".env"
@@ -59,7 +58,7 @@ class RedisStackClient:
 
     def __init__(self, config: RedisConfig):
         self.config = config
-        self._client: Optional[redis.Redis] = None
+        self._client: redis.Redis | None = None
 
     @property
     def client(self) -> redis.Redis:
@@ -102,7 +101,7 @@ class RedisStackClient:
         """Set a key-value pair in Redis."""
         return self.client.set(key, value)
 
-    def get(self, key: str) -> Optional[str]:
+    def get(self, key: str) -> str | None:
         """Get a value from Redis."""
         return self.client.get(key)
 
@@ -118,11 +117,11 @@ class RedisStackClient:
 
     def drop_search_index(self, index_name: str) -> None:
         """Drop a RediSearch index."""
-        try:
-            self.client.ft(index_name).dropindex()
-        except redis.exceptions.ResponseError:
+        from contextlib import suppress
+
+        with suppress(redis.exceptions.ResponseError):
             # Index doesn't exist, ignore
-            pass
+            self.client.ft(index_name).dropindex()
 
     def add_document(self, key: str, mapping: dict[str, Any]) -> bool:
         """Add a document to Redis (for searching)."""
@@ -137,7 +136,7 @@ class RedisStackClient:
         """Set a JSON value at a specific path."""
         return self.client.json().set(key, path, value)
 
-    def json_get(self, key: str, path: Optional[str] = None) -> Any:
+    def json_get(self, key: str, path: str | None = None) -> Any:
         """Get a JSON value from a specific path."""
         if path:
             return self.client.json().get(key, path)

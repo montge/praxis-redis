@@ -236,7 +236,7 @@ class TestCompleteWorkflow:
         assert "Laptop" in laptop_data
 
         # Cleanup
-        for key in products.keys():
+        for key in products:
             redis_client.delete(key)
         redis_client.drop_search_index(product_index)
         for i in range(1, 3):

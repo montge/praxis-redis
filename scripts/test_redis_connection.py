@@ -2,17 +2,17 @@
 
 # scripts/test_redis_connection.py
 
-import redis
+import os
+import sys
 import time
 from datetime import datetime
-import sys
-import os
-import json
-from redis.commands.search.field import TextField, NumericField, TagField
+from pathlib import Path
+
+import redis
+from dotenv import load_dotenv
+from redis.commands.search.field import NumericField, TagField, TextField
 from redis.commands.search.indexDefinition import IndexDefinition, IndexType
 from redis.commands.search.query import Query
-from dotenv import load_dotenv
-from pathlib import Path
 
 
 def load_env():
@@ -114,9 +114,8 @@ def test_redisearch(redis_client):
         try:
             redis_client.ft("blog-idx").dropindex()
             print("✅ Dropped existing index")
-        except:
+        except Exception:
             print("No existing index to drop")
-            pass
 
         # Create the index
         print("Creating search index...")
@@ -174,13 +173,13 @@ def test_redisjson(redis_client):
         redis_client.json().set(json_key, "$", json_data)
 
         # Retrieve the entire document
-        result = redis_client.json().get(json_key)
+        _result = redis_client.json().get(json_key)
 
         # Test JSON path operations
         age = redis_client.json().get(json_key, "$.profile.age")
         interests = redis_client.json().get(json_key, "$.profile.interests")
 
-        print(f"✅ RedisJSON test successful - stored and retrieved JSON data")
+        print("✅ RedisJSON test successful - stored and retrieved JSON data")
         print(f"Retrieved age: {age}")
         print(f"Retrieved interests: {interests}")
 
@@ -237,7 +236,7 @@ def test_redis_connection():
         test_key = "test:hello"
         test_value = f"Hello World! Timestamp: {datetime.now()}"
         redis_client.set(test_key, test_value)
-        print(f"✅ Basic Redis operations successful")
+        print("✅ Basic Redis operations successful")
 
         # Test RediSearch
         if not test_redisearch(redis_client):
